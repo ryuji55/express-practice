@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/bin/www",
-    "build": "tsc",
-    "nodemon": "nodemon"
+    "start:dev": "tsc -w & nodemon"
   },
   "dependencies": {
     "@types/node": "^18.15.7",
