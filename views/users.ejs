@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p><%= content %></p>
+    <form method="post" action="/users/post">
+      <div>
+        <label for="msg">Message:</label>
+        <input type="text" name="message" id="msg" />
+      </div>
+      <input type="submit" value="送信" class="btn btn-primary" />
+    </form>
+  </body>
+</html>
