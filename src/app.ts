@@ -6,14 +6,29 @@ import logger from "morgan";
 import { CustomError } from "./errors/CustomError";
 import { indexRouter } from "./routes/index";
 import { usersRouter } from "./routes/users";
+import cors from "cors";
 
 const app: Application = express();
+const allowedOrigins = ["http://localhost:3001"];
 
 // view engine setup
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 
 app.use(logger("dev"));
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
