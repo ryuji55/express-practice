@@ -6,4 +6,8 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.render("index", { title: "Express" });
 });
 
+router.get("/api", (req: Request, res: Response, next: NextFunction) => {
+  res.json({ message: "初めてのexpress api" });
+});
+
 export { router as indexRouter };
