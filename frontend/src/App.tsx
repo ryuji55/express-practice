@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Users from "./components/users/Users";
+import AppRoutes from "./router";
 
-function App() {
+const App = memo(() => {
   const [message, setMessage] = useState("");
   useEffect(() => {
     fetch("/api")
@@ -11,12 +12,10 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>フロントエンド</h1>
-      <p>{message}</p>
-      <Users />
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
-}
+});
 
 export default App;
