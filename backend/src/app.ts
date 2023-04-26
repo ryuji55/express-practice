@@ -11,6 +11,7 @@ import { PrismaUserRepository } from "./infrastructure/database/PrismaUserReposi
 import { UserService } from "./domain/user/services/UserService";
 import { UserController } from "./application/user/UserController";
 import { userRouter } from "./application/user/UserRouter";
+import { config } from "process";
 
 const app: Application = express();
 const allowedOrigins = ["http://localhost:3001"];
