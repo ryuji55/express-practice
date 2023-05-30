@@ -1,8 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { UserRepository } from "../../domain/user/repositories/UserRepository";
+import { IUserRepository } from "../../domain/user/repositories/IUserRepository";
 import { User } from "../../domain/user/entities/User";
+import { UserId } from "../../domain/user/valueObject/UserId";
+import { UserName } from "../../domain/user/valueObject/UserName";
 
-export class PrismaUserRepository implements UserRepository {
+export class PrismaUserRepository implements IUserRepository {
   private prisma: PrismaClient;
 
   constructor() {
@@ -12,29 +14,36 @@ export class PrismaUserRepository implements UserRepository {
   async create(user: User): Promise<User> {
     const createUser = await this.prisma.user.create({
       data: {
-        id: user.id,
-        name: user.name,
+        id: user.id.getValue(),
+        name: user.name.getValue(),
         email: user.email,
       },
     });
-    return new User(createUser.id, createUser.name, createUser.email);
+
+    const createUserId = new UserId(createUser.id);
+    const createUserName = new UserName(createUser.name);
+    return new User(createUserId, createUserName, createUser.email);
   }
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: UserId): Promise<User | null> {
     const foundUser = await this.prisma.user.findUnique({
       where: {
-        id,
+        id: id.getValue(),
       },
     });
     return foundUser
-      ? new User(foundUser.id, foundUser.name, foundUser.email)
+      ? new User(
+          new UserId(foundUser.id),
+          new UserName(foundUser.name),
+          foundUser.email
+        )
       : null;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: UserId): Promise<void> {
     await this.prisma.user.delete({
       where: {
-        id,
+        id: id.getValue(),
       },
     });
   }

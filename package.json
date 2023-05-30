@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/bin/www",
-    "nodemon": "tsc -w & nodemon"
+    "start": "nodemon dist/bin/www"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
