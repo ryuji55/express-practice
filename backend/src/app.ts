@@ -14,7 +14,7 @@ import { userRouter } from "./application/user/UserRouter";
 import { config } from "process";
 
 const app: Application = express();
-const allowedOrigins = ["http://localhost:3001"];
+const allowedOrigins = ["http://localhost:3000"];
 
 // view engine setup
 app.set("views", path.join(__dirname, "../views"));
@@ -34,13 +34,15 @@ app.use(
   })
 );
 
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
 
 app.use("/users", userRouter);
 

@@ -40,4 +40,8 @@ export class UserApplicationService {
   async deleteUser(id: UserId): Promise<void> {
     return this.userRepository.delete(id);
   }
+
+  async getUsers(): Promise<User[]> {
+    return this.userRepository.findAll();
+  }
 }
