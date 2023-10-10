@@ -61,7 +61,7 @@ const Users = memo(() => {
 });
 
 const StyledButton = styled("div")`
-  margin: 20px 0 0 0;
+  margin: 20px;
 `;
 
 const Wrapper = styled("div")`
