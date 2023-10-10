@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 import createFormData from "../../methods/apis/createFormData";
+import { useGetUsersQuery } from "../../api";
 
 type FormData = {
   name: string;
@@ -24,6 +25,9 @@ const Users = memo(() => {
   const handleClick = useCallback(() => {
     console.log("初めてのMUI Button");
   }, []);
+
+  const { data = [], isFetching } = useGetUsersQuery();
+  console.log(data, isFetching);
 
   return (
     <Wrapper>
