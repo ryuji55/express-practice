@@ -1,7 +1,9 @@
+name: Assign author
+
 on:
   pull_request:
     types: [opened]
-name: Assign author
+
 jobs:
   assignAuthor:
     name: Assign author to PR
